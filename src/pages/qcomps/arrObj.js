@@ -7,25 +7,30 @@ const initialList = [
   { id: 2, title: 'Terracotta Army', seen: true },
 ];
 
+function deepCopy(list) {
+
+  return list.map((item) => ({...item})); 
+}
+
 export default function BucketList() {
-  const [myList, setMyList] = useState(initialList);
-  const [yourList, setYourList] = useState(
-    initialList
+  const [myList, setMyList] = useState(deepCopy(initialList));
+  const [yourList, setYourList] = useState( 
+    deepCopy(initialList)
   );
 
   function handleToggleMyList(artworkId, nextSeen) {
-    const tmpList = myList.map(e => {
+    const tmpList = myList.map(e => { 
         if (e.id === artworkId) {
-            e.seen = nextSeen
-        }
+            e.seen = nextSeen 
+        } 
         return e
     });
     setMyList(tmpList);
   }
 
   function handleToggleYourList(artworkId, nextSeen) {
-    const tmpList = yourList.map(e => {
-        if (e.id === artworkId) {
+    const tmpList = yourList.map(e => {  
+        if (e.id === artworkId) { 
             e.seen = nextSeen
         }
         return e
@@ -42,7 +47,7 @@ export default function BucketList() {
         onToggle={handleToggleMyList} />
       <h2>Your list of art to see:</h2>
       <ItemList
-        artworks={yourList}
+        artworks={yourList} // this 
         onToggle={handleToggleYourList} />
     </>
   );
